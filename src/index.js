@@ -2,7 +2,7 @@
 import 'dotenv/config';
 import app from './app.js';
 import DB from './database/db.js';
-import { Client } from './models/clientModel.js';
+
 const PORT = process.env.PORT || 3000;
 
 

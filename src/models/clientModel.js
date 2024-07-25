@@ -1,6 +1,6 @@
 import { Sequelize, DataTypes, } from "sequelize";
-import database from "../database/db.js";
-export const Client = database.define('cliente', {
+import DB from "../database/db.js";
+export const Client = DB.define('cliente', {
   nombre: {
     type: DataTypes.STRING,
     allowNull: false
