@@ -1,4 +1,4 @@
-import { Sequelize, DataTypes, } from "sequelize";
+import { DataTypes, } from "sequelize";
 import DB from "../database/db.js";
 export const Client = DB.define('cliente', {
   nombre: {
