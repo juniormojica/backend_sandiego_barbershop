@@ -13,6 +13,14 @@ export default function (sequelize) {
     amount: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    id_cliente: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Clients', // nombre de la tabla en singular
+        key: 'id_cliente'
+      },
+      allowNull: false
     }
   }
   )
