@@ -1,8 +1,11 @@
 import { Sequelize } from "sequelize";
-import { Client } from "../models/clientModel.js";
-const DB = new Sequelize('postgres://postgres:postgres@localhost:5432/registrobarberia') // Example for postgres
+import definePaymentModel from "../models/PaymentModel.js"
+import defineClientModel from "../models/clientModel.js"
+const sequelize = new Sequelize('postgres://postgres:postgres@localhost:5432/registrobarberia') // Example for postgres
 
 
-Client(DB)
-console.log(DB.models);
-export default DB
+const Payment = definePaymentModel(sequelize)
+const Client = defineClientModel(sequelize)
+console.log(sequelize.models);
+
+export default sequelize
