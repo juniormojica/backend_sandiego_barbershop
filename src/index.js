@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 
 try {
-  await sequelize.sync({ logging: false, force: true })
+  await sequelize.sync({ logging: false, alter: true })
   console.log('All models were created');
   app.listen(PORT, () => {
     console.log(`Running on port ${PORT}`);

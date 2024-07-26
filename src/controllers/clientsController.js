@@ -2,6 +2,25 @@ import sequelize from "../database/db.js"
 
 const { Client } = sequelize.models
 
+
+export const getUsers = async (id) => {
+  try {
+    if (id) {
+      const findedClient = await Client.findByPk(id)
+      if (!findedClient) {
+        const allClients = await Client.findAll()
+        return allClients
+      }
+      return findedClient
+
+    }
+
+
+  } catch (error) {
+    return error.message
+  }
+}
+
 export const createClient = async (name, phone) => {
 
   try {

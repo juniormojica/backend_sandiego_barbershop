@@ -5,6 +5,7 @@ const clientRouter = express.Router();
 
 clientRouter
   .get('/', getClientsHandler)
+  .get('/:id', getClientsHandler)
   .post('/', postClientHandler)
 
 export default clientRouter;

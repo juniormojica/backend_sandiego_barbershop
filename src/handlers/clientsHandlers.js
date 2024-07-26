@@ -1,9 +1,16 @@
-import { createClient } from "../controllers/clientsController.js"
+import { createClient, getUsers } from "../controllers/clientsController.js"
 export const getClientsHandler = async (req, res) => {
   try {
-    res.json('Está ruta trae todos los usuarios cuando existan')
-  } catch (error) {
+    let { id } = req.params
 
+    let user = await getUsers(id)
+    res.status(201).json({ error: false, data: user })
+
+
+
+
+  } catch (error) {
+    res.status(400).json({ error: true, message: error.message })
   }
 }
 
