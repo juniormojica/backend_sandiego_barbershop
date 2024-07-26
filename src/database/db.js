@@ -13,9 +13,9 @@ console.log(sequelize.models);
 const { Client, Payment, PaymentMethod } = sequelize.models
 //Relations
 Client.hasMany(Payment, {
-  foreignKey: 'id_cliente'
+  foreignKey: 'id_client'
 })
-Payment.belongsTo(Client, { foreignKey: 'id_cliente' })
+Payment.belongsTo(Client, { foreignKey: 'id_client' })
 
 Payment.belongsToMany(PaymentMethod, { through: 'Payments_paymentmethod', foreignKey: 'id_payment', timestamps: false })
 PaymentMethod.belongsToMany(Payment, { through: 'Payments_paymentmethod', foreignKey: 'id_paymentmethod', timestamps: false })

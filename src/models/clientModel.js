@@ -1,16 +1,17 @@
 import { DataTypes, } from "sequelize";
-import DB from "../database/db.js";
+
 export default (sequelize) => {
   sequelize.define('Client', {
-    nombre: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    telefono: {
+    phone: {
       type: DataTypes.STRING,
       allowNull: false
+
     },
-    id_cliente: {
+    id_client: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
