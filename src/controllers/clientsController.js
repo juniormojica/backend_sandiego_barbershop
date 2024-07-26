@@ -3,7 +3,7 @@ import sequelize from "../database/db.js"
 const { Client } = sequelize.models
 
 
-export const getUsers = async (id) => {
+export const getClient = async (id) => {
   try {
     if (id) {
       const findedClient = await Client.findByPk(id)

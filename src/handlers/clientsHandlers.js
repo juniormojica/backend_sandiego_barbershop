@@ -1,9 +1,9 @@
-import { createClient, getUsers } from "../controllers/clientsController.js"
+import { createClient, getClient } from "../controllers/clientsController.js"
 export const getClientsHandler = async (req, res) => {
   try {
     let { id } = req.params
 
-    let user = await getUsers(id)
+    let user = await getClient(id)
     res.status(201).json({ error: false, data: user })
 
 
