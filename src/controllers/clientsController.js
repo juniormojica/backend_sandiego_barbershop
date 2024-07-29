@@ -1,12 +1,26 @@
 import sequelize from "../database/db.js"
 
-const { Client } = sequelize.models
+const { Client, Payment, PaymentMethod } = sequelize.models
 
 
 export const getClient = async (id) => {
   try {
     if (id) {
-      const findedClient = await Client.findByPk(id)
+      const findedClient = await Client.findByPk(id, {
+        attributes: ['id_client', 'name', 'phone'],
+        include: {
+          model: Payment,
+          attributes: ['amount', 'createdAt'],
+
+          include: {
+            model: PaymentMethod,
+            attributes: ['method_name'],
+            through: { attributes: [] }
+          },
+
+        },
+      })
+
       if (!findedClient) {
         const allClients = await Client.findAll()
         return allClients

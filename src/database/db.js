@@ -2,22 +2,49 @@ import { Sequelize } from "sequelize";
 import definePaymentModel from "../models/PaymentModel.js"
 import defineClientModel from "../models/clientModel.js"
 import definePaymentMethodModel from "../models/PaymentMethodModel.js"
+import defineBarberModel from '../models/barberModel.js'
+import defineServiceModel from '../models/serviceModel.js'
+import defineProvidedServiceModel from '../models/ProvidedServiceModel.js'
+import ProvidedServiceModel from "../models/ProvidedServiceModel.js";
+
 const sequelize = new Sequelize('postgres://postgres:postgres@localhost:5432/registrobarberia') // Example for postgres
 
 definePaymentModel(sequelize)
 defineClientModel(sequelize)
 definePaymentMethodModel(sequelize)
+defineBarberModel(sequelize)
+defineServiceModel(sequelize)
+defineProvidedServiceModel(sequelize)
 console.log(sequelize.models);
 
 
-const { Client, Payment, PaymentMethod } = sequelize.models
-//Relations
+const { Client, Payment, PaymentMethod, Barber, Service, ProvidedService } = sequelize.models
+
+
+//Relation beetween CLient and payment 
 Client.hasMany(Payment, {
   foreignKey: 'id_client'
 })
 Payment.belongsTo(Client, { foreignKey: 'id_client' })
 
+// intermediate table beetween payments and paymentMethod 
 Payment.belongsToMany(PaymentMethod, { through: 'Payments_paymentmethod', foreignKey: 'id_payment', timestamps: false })
 PaymentMethod.belongsToMany(Payment, { through: 'Payments_paymentmethod', foreignKey: 'id_paymentmethod', timestamps: false })
+
+
+//intermediate table beetween serviceProvided And Services 
+ProvidedService.belongsToMany(Service, { through: 'ProvidedServiceService', foreignKey: 'id_provided' })
+Service.belongsToMany(ProvidedService, { through: 'ProvidedServiceService', foreignKey: 'id_service' })
+
+
+//serviceProvided Relations with barber,client and payment 
+Barber.hasMany(ProvidedService, { foreignKey: 'id_barber' });
+ProvidedService.belongsTo(Barber, { foreignKey: 'id_barber' });
+
+Client.hasMany(ProvidedService, { foreignKey: 'id_client' });
+ProvidedService.belongsTo(Client, { foreignKey: 'id_client' });
+
+Payment.hasMany(ProvidedService, { foreignKey: 'id_payment' });
+ProvidedService.belongsTo(Payment, { foreignKey: 'id_payment' });
 
 export default sequelize

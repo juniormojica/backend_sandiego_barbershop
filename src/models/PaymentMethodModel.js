@@ -11,6 +11,9 @@ export default (sequelize) => {
     method_name: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+
+  }, {
+    timestamps: false
   })
 }
