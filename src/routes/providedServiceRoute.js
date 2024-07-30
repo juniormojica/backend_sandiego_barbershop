@@ -1,9 +1,10 @@
 import { Router } from "express";
-
+import { getProvidedHandler, postProvidedHandler } from '../handlers/providedServiceHandlers.js'
 const providedServiceRouter = Router()
 
 providedServiceRouter
-  .get('/', (req, res) => {
-    res.send('Provided Service Route Working')
-  })
+  .get('/', getProvidedHandler)
+  .post('/', postProvidedHandler)
+
+
 export default providedServiceRouter
