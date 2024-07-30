@@ -6,8 +6,12 @@ import defineBarberModel from '../models/barberModel.js'
 import defineServiceModel from '../models/serviceModel.js'
 import defineProvidedServiceModel from '../models/ProvidedServiceModel.js'
 
+const { DB_HOST, DB_NAME, DB_PORT, DB_USER, DB_PASSWORD } = process.env
 
-const sequelize = new Sequelize('postgres://postgres:postgres@localhost:5432/registrobarberia') // Example for postgres
+
+
+
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`) // Example for postgres
 
 definePaymentModel(sequelize)
 defineClientModel(sequelize)
