@@ -4,7 +4,7 @@ import app from './app.js';
 import sequelize from './database/db.js';
 import { injectSeeds } from './seeds/dbSeed.js'
 
-const PORT = process.env.PORT || 3000;
+const SERVER_PORT = process.env.SERVER_PORT || 3000;
 
 
 try {
