@@ -1,4 +1,18 @@
-import { createPayment } from "../controllers/paymentControllers.js"
+import { createPayment, getAllPayments } from "../controllers/paymentControllers.js"
+
+
+export const getPaymentsHandler = async (req, res) => {
+  try {
+    const payments = await getAllPayments()
+    if (!payments) {
+      throw Error('No hay ningun pago creado ')
+    }
+    res.status(201).json({ data: payments, error: false })
+  } catch (error) {
+    res.status(400).json({ message: error.message, error: true })
+  }
+}
+
 
 export const postPaymentHandler = async (req, res) => {
 

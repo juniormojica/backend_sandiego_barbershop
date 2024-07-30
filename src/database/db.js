@@ -5,7 +5,7 @@ import definePaymentMethodModel from "../models/PaymentMethodModel.js"
 import defineBarberModel from '../models/barberModel.js'
 import defineServiceModel from '../models/serviceModel.js'
 import defineProvidedServiceModel from '../models/ProvidedServiceModel.js'
-import ProvidedServiceModel from "../models/ProvidedServiceModel.js";
+
 
 const sequelize = new Sequelize('postgres://postgres:postgres@localhost:5432/registrobarberia') // Example for postgres
 
@@ -15,7 +15,7 @@ definePaymentMethodModel(sequelize)
 defineBarberModel(sequelize)
 defineServiceModel(sequelize)
 defineProvidedServiceModel(sequelize)
-console.log(sequelize.models);
+
 
 
 const { Client, Payment, PaymentMethod, Barber, Service, ProvidedService } = sequelize.models
