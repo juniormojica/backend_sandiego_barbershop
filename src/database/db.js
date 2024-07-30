@@ -48,7 +48,7 @@ ProvidedService.belongsTo(Barber, { foreignKey: 'id_barber' });
 Client.hasMany(ProvidedService, { foreignKey: 'id_client' });
 ProvidedService.belongsTo(Client, { foreignKey: 'id_client' });
 
-Payment.hasMany(ProvidedService, { foreignKey: 'id_payment' });
-ProvidedService.belongsTo(Payment, { foreignKey: 'id_payment' });
+ProvidedService.hasMany(Payment, { foreignKey: 'id_provided' });
+Payment.belongsTo(ProvidedService, { foreignKey: 'id_provided' });
 
 export default sequelize
