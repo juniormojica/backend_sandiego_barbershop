@@ -75,3 +75,17 @@ export const updateClient = async (id, name, phone) => {
 
 
 
+export const deleteClient = async (id) => {
+  const client = await Client.findByPk(id)
+  if (!client) {
+    throw Error('El cliente a eliminar no existe')
+  }
+  const deletedClient = await Client.destroy({
+    where: {
+      id_client: id
+    }
+
+  })
+
+  return `Usuario con id ${id} eliminado correctamente`
+}
