@@ -1,4 +1,4 @@
-import { createClient, getClient } from "../controllers/clientsController.js"
+import { createClient, getClient, updateClient } from "../controllers/clientsController.js"
 export const getClientsHandler = async (req, res) => {
   try {
     let { id } = req.params
@@ -26,4 +26,22 @@ export const postClientHandler = async (req, res) => {
   }
 
 
+}
+
+export const patchClientHandler = async (req, res) => {
+  const { name, phone } = req.body
+  const { id } = req.params
+  console.log(name, phone, id);
+  try {
+
+
+    if (id && (name || phone)) {
+      const client = await updateClient(id, name, phone)
+      res.status(200).json({ data: client, error: false })
+    }
+
+  } catch (error) {
+    res.status(400).json({ message: 'No se pudo crear el cliente', error: true })
+
+  }
 }
