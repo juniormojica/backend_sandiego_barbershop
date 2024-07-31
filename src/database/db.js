@@ -32,8 +32,8 @@ Client.hasMany(Payment, {
 Payment.belongsTo(Client, { foreignKey: 'id_client' })
 
 // intermediate table beetween payments and paymentMethod 
-Payment.belongsToMany(PaymentMethod, { through: 'Payments_paymentmethod', as: 'PaymentMethod', foreignKey: 'id_payment', timestamps: false })
-PaymentMethod.belongsToMany(Payment, { through: 'Payments_paymentmethod', as: 'PaymentMethod', foreignKey: 'id_paymentmethod', timestamps: false })
+Payment.belongsToMany(PaymentMethod, { through: 'Payments_paymentmethod', foreignKey: 'id_payment', timestamps: false })
+PaymentMethod.belongsToMany(Payment, { through: 'Payments_paymentmethod', foreignKey: 'id_paymentmethod', timestamps: false })
 
 
 //intermediate table beetween serviceProvided And Services 

@@ -21,13 +21,13 @@ export const getClient = async (id) => {
         },
       })
 
-      if (!findedClient) {
-        const allClients = await Client.findAll()
-        return allClients
-      }
       return findedClient
 
     }
+
+    const allClients = await Client.findAll()
+    return allClients
+
 
 
   } catch (error) {
