@@ -10,7 +10,7 @@ const app = express();
 // Usa el router de clientes para manejar las rutas que comienzan con /clientes
 app.use(morgan('dev'))
 app.use(express.json())
-app.use('/clientes', clientRouter);
+app.use('/clients', clientRouter);
 app.use('/paymentmethods', paymentMethodRouter)
 app.use('/payments', paymentRouter)
 app.use('/providedservices', providedServiceRouter)
