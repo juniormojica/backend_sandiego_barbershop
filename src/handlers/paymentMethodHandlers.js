@@ -1,4 +1,4 @@
-import { postPaymentMethod, getPaymentMethods, deletePaymentMethod } from "../controllers/paymentMethodsController.js"
+import { postPaymentMethod, getPaymentMethods, deletePaymentMethod, updatePaymentMethod } from "../controllers/paymentMethodsController.js"
 export const getPaymentMethodsHanddler = async (req, res) => {
   try {
 
@@ -35,6 +35,24 @@ export const deletePaymentMethodHandler = async (req, res) => {
     }
     const methodDeleted = await deletePaymentMethod(id_method)
     res.status(201).json({ error: false, data: methodDeleted })
+
+  } catch (error) {
+    res.status(400).json({ error: true, message: error.message })
+  }
+
+
+
+}
+
+
+export const updatePaymentMethodHandler = async (req, res) => {
+  try {
+    const { id_method, newMethodName } = req.body
+    if (!id_method) {
+      throw Error('Se necesita el id del metodo para Actualizarlo')
+    }
+    const updatedMethod = await updatePaymentMethod(id_method, newMethodName)
+    res.status(201).json({ error: false, data: updatedMethod })
 
   } catch (error) {
     res.status(400).json({ error: true, message: error.message })
