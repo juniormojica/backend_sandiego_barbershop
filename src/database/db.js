@@ -5,6 +5,7 @@ import definePaymentMethodModel from "../models/PaymentMethodModel.js"
 import defineBarberModel from '../models/barberModel.js'
 import defineServiceModel from '../models/serviceModel.js'
 import defineProvidedServiceModel from '../models/ProvidedServiceModel.js'
+import defineUserModel from '../models/userModel.js'
 
 const { DB_HOST, DB_NAME, DB_PORT, DB_USER, DB_PASSWORD } = process.env
 
@@ -19,7 +20,7 @@ definePaymentMethodModel(sequelize)
 defineBarberModel(sequelize)
 defineServiceModel(sequelize)
 defineProvidedServiceModel(sequelize)
-
+defineUserModel(sequelize)
 
 
 const { Client, Payment, PaymentMethod, Barber, Service, ProvidedService } = sequelize.models
