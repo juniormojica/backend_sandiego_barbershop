@@ -1,4 +1,4 @@
-import { signUpController, getAllUsers, getUserById } from "../controllers/authController.js";
+import { signUpController } from "../controllers/authController.js";
 import jwt from 'jsonwebtoken'
 import { comparePassword, encriptPassWord } from "../utils/bcryptUtils.js";
 import { checkUserName } from "../utils/checkUsername.js";
@@ -56,31 +56,3 @@ export const signUpHandler = async (req, res) => {
 }
 
 
-export const getUsersHandler = async (req, res) => {
-  try {
-    const users = await getAllUsers()
-    if (!users) {
-      throw new Error('No Se encontraron los usuarios')
-    }
-    res.status(200).json({ error: false, data: users })
-
-  } catch (error) {
-    res.status(400).json({ error: true, message: error.message })
-  }
-}
-
-export const getUserByIdHandler = async (req, res) => {
-  try {
-    let { id } = req.params
-
-    let user = await getUserById(id)
-    res.status(201).json({ error: false, data: user })
-
-
-
-  } catch (error) {
-    res.status(400).json({ error: true, message: error.message })
-  }
-
-
-} 
