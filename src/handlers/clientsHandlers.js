@@ -12,8 +12,8 @@ export const getClientsHandler = async (req, res) => {
 
 export const postClientHandler = async (req, res) => {
   try {
-    const { name, phone, id } = req.body
-    const user = await createClient(name, phone, id)
+    const { name, phone, idUser } = req.body
+    const user = await createClient(name, phone, idUser)
     res.status(200).json({ data: user, error: false })
   } catch (error) {
     res.status(400).json({ message: 'No se pudo crear el cliente', error: true })
