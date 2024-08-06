@@ -30,9 +30,12 @@ export const getClient = async (id) => {
   }
 }
 
-export const createClient = async (name, phone, id) => {
+export const createClient = async (name, phone, idUser) => {
   try {
-    const newClient = await Client.create({ name, phone, id })
+    const newClient = await Client.create({ name, phone, idUser })
+    if (!newClient) {
+      throw new Error('No se pudo crear el cliente')
+    }
     return newClient
   } catch (error) {
     return error.message
