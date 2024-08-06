@@ -4,7 +4,7 @@ export default function (sequelize) {
   sequelize.define(
     'Payment',
     {
-      id_payment: {
+      idPayment: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true

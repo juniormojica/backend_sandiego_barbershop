@@ -11,15 +11,15 @@ export const getProvidedHandler = async (req, res) => {
 
 export const postProvidedHandler = async (req, res) => {
   try {
-    const { total, id_barber, id_client, id_service } = req.body
+    const { total, idBarber, idClient, idService } = req.body
 
-    console.log(total, id_barber, id_client, id_service)
+    console.log(total, idBarber, idClient, idService)
 
-    if (!total || !id_barber || !id_client || !id_service) {
+    if (!total || !idBarber || !idClient || !idService) {
       throw new Error('No se puede crear el servicio faltan datos ')
     }
 
-    const service = await postProvided(total, id_barber, id_client, id_service)
+    const service = await postProvided(total, idBarber, idClient, idService)
     res.status(201).json({ error: false, data: service })
   } catch (error) {
     res.status(400).json({ error: true, message: error.message })

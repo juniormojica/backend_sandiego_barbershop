@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize'
 
 export default (sequelize) => {
   sequelize.define('User', {
-    id: {
+    idUser: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true

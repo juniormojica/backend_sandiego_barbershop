@@ -7,7 +7,7 @@ import { injectSeeds } from './seeds/dbSeed.js'
 const SERVER_PORT = process.env.SERVER_PORT || 3000
 
 try {
-  await sequelize.sync({ logging: false, alter: true })
+  await sequelize.sync({ logging: false, force: true })
   // await injectSeeds()
   app.listen(SERVER_PORT, () => {
     console.log(`Running on port ${SERVER_PORT}`)

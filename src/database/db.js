@@ -19,30 +19,35 @@ defineServiceModel(sequelize)
 defineProvidedServiceModel(sequelize)
 defineUserModel(sequelize)
 
-const { Client, Payment, PaymentMethod, Barber, Service, ProvidedService } = sequelize.models
+const { Client, Payment, PaymentMethod, Barber, Service, ProvidedService, User } = sequelize.models
 
 // Relation beetween CLient and payment
 Client.hasMany(Payment, {
-  foreignKey: 'id_client'
+  foreignKey: 'idClient'
 })
-Payment.belongsTo(Client, { foreignKey: 'id_client' })
+Payment.belongsTo(Client, { foreignKey: 'idClient' })
+
+Barber.belongsTo(User, { foreignKey: 'idUser' })
+User.hasOne(Barber, { foreignKey: 'idUser' })
+User.hasOne(Client, { foreignKey: 'idUser' })
+Client.belongsTo(User, { foreignKey: 'idUser' })
 
 // intermediate table beetween payments and paymentMethod
-Payment.belongsToMany(PaymentMethod, { through: 'Payments_paymentmethod', foreignKey: 'id_payment', timestamps: false })
-PaymentMethod.belongsToMany(Payment, { through: 'Payments_paymentmethod', foreignKey: 'id_paymentmethod', timestamps: false })
+Payment.belongsToMany(PaymentMethod, { through: 'PaymentsPaymentmethod', foreignKey: 'idPayment', timestamps: false })
+PaymentMethod.belongsToMany(Payment, { through: 'PaymentsPaymentmethod', foreignKey: 'idPaymentMethod', timestamps: false })
 
 // intermediate table beetween serviceProvided And Services
-ProvidedService.belongsToMany(Service, { through: 'ProvidedServiceService', foreignKey: 'id_provided' })
-Service.belongsToMany(ProvidedService, { through: 'ProvidedServiceService', foreignKey: 'id_service' })
+ProvidedService.belongsToMany(Service, { through: 'ProvidedServiceService', foreignKey: 'idProvided' })
+Service.belongsToMany(ProvidedService, { through: 'ProvidedServiceService', foreignKey: 'idService' })
 
 // serviceProvided Relations with barber,client and payment
-Barber.hasMany(ProvidedService, { foreignKey: 'id_barber' })
-ProvidedService.belongsTo(Barber, { foreignKey: 'id_barber' })
+Barber.hasMany(ProvidedService, { foreignKey: 'idBarber' })
+ProvidedService.belongsTo(Barber, { foreignKey: 'idBarber' })
 
-Client.hasMany(ProvidedService, { foreignKey: 'id_client' })
-ProvidedService.belongsTo(Client, { foreignKey: 'id_client' })
+Client.hasMany(ProvidedService, { foreignKey: 'idClient' })
+ProvidedService.belongsTo(Client, { foreignKey: 'idClient' })
 
-ProvidedService.hasMany(Payment, { foreignKey: 'id_provided' })
-Payment.belongsTo(ProvidedService, { foreignKey: 'id_provided' })
+ProvidedService.hasMany(Payment, { foreignKey: 'idProvided' })
+Payment.belongsTo(ProvidedService, { foreignKey: 'idProvided' })
 
 export default sequelize

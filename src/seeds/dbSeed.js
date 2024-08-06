@@ -1,6 +1,6 @@
 import sequelize from '../database/db.js'
 
-const { Barber, Client, PaymentMethod, Service } = sequelize.models
+const { Barber, Client, PaymentMethod, Service, User } = sequelize.models
 
 const barbersData = [
   {
@@ -27,54 +27,94 @@ const clientsData = [
   { name: 'Luis Fernández', phone: '555-6789' }]
 
 const paymentMethods = [
-  { method_name: 'nequi' },
-  { method_name: 'bancolombia' },
-  { method_name: 'efectivo' },
-  { method_name: 'daviPlata' }
+  { methodName: 'nequi' },
+  { methodName: 'bancolombia' },
+  { methodName: 'efectivo' },
+  { methodName: 'daviPlata' }
 ]
 
 const services = [
   {
-    service_name: 'Corte de Cabello',
+    serviceName: 'Corte de Cabello',
     duration: 30, // duración en minutos
     category: 'Corte'
   },
   {
-    service_name: 'Barba',
+    serviceName: 'Barba',
     duration: 20, // duración en minutos
     category: 'Barba'
   },
   {
-    service_name: 'Barba y Corte',
+    serviceName: 'Barba y Corte',
     duration: 45, // duración en minutos
     category: 'Barba y Corte'
   },
   {
-    service_name: 'Keratina',
+    serviceName: 'Keratina',
     duration: 60, // duración en minutos
     category: 'Tratamiento'
   },
   {
-    service_name: 'Coloración',
+    serviceName: 'Coloración',
     duration: 90, // duración en minutos
     category: 'Coloración'
   },
   {
-    service_name: 'Cerquillos',
+    serviceName: 'Cerquillos',
     duration: 15, // duración en minutos
     category: 'Corte'
   },
   {
-    service_name: 'Cepillado',
+    serviceName: 'Cepillado',
     duration: 20, // duración en minutos
     category: 'Tratamiento'
   }
 ]
+
+const usersData = [
+  {
+    username: 'john_doe',
+    password: 'securePassword123',
+    email: 'john.doe@example.com',
+    roles: ['user', 'admin', 'barber'],
+    isActive: true
+  },
+  {
+    username: 'jane_smith',
+    password: 'securePassword123',
+    email: 'jane.smith@example.com',
+    roles: ['user', 'owner'],
+    isActive: true
+  },
+  {
+    username: 'michael_jones',
+    password: 'securePassword123',
+    email: 'michael.jones@example.com',
+    roles: ['admin', 'barber'],
+    isActive: false
+  },
+  {
+    username: 'emily_davis',
+    password: 'securePassword123',
+    email: 'emily.davis@example.com',
+    roles: ['user', 'admin', 'owner'],
+    isActive: true
+  },
+  {
+    username: 'david_wilson',
+    password: 'securePassword123',
+    email: 'david.wilson@example.com',
+    roles: ['user', 'barber'],
+    isActive: false
+  }
+]
+
 export const injectSeeds = async () => {
   await Barber.bulkCreate(barbersData)
   await Client.bulkCreate(clientsData)
   await PaymentMethod.bulkCreate(paymentMethods)
   await Service.bulkCreate(services)
+  await User.bulkCreate(usersData)
 
   console.log('seeds injected!')
 }

@@ -1,13 +1,13 @@
 import sequelize from '../database/db.js'
 const { Payment, Client } = sequelize.models
 export const createPayment = async (payment) => {
-  const { id_client, id_method, amount, id_provided } = payment
+  const { idClient, idMethod, amount, idProvided } = payment
 
   const newPayment = await Payment.create({ amount })
 
-  await newPayment.setClient(id_client)
-  await newPayment.addPaymentMethod(id_method)
-  await newPayment.setProvidedService(id_provided)
+  await newPayment.setClient(idClient)
+  await newPayment.addPaymentMethod(idMethod)
+  await newPayment.setProvidedService(idProvided)
 
   newPayment.save()
   return newPayment
@@ -15,10 +15,10 @@ export const createPayment = async (payment) => {
 
 export const getAllPayments = async () => {
   const payments = await Payment.findAll({
-    attributes: ['id_payment', 'amount', 'createdAt'],
+    attributes: ['idPayment', 'amount', 'createdAt'],
     include: {
       model: Client,
-      attributes: ['id_client', 'name', 'phone']
+      attributes: ['idClient', 'name', 'phone']
     }
   })
   return payments

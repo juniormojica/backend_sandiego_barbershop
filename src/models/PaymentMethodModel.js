@@ -2,13 +2,13 @@ import { DataTypes } from 'sequelize'
 
 export default (sequelize) => {
   sequelize.define('PaymentMethod', {
-    id_method: {
+    idMethod: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
 
     },
-    method_name: {
+    methodName: {
       type: DataTypes.STRING,
       allowNull: false
     }

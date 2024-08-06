@@ -2,13 +2,13 @@ import { DataTypes } from 'sequelize'
 export default (sequelize) => {
   sequelize.define('Service',
     {
-      id_service: {
+      idService: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
 
       },
-      service_name: {
+      serviceName: {
         type: DataTypes.STRING,
         allowNull: false
       },

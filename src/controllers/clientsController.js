@@ -6,14 +6,14 @@ export const getClient = async (id) => {
   try {
     if (id) {
       const findedClient = await Client.findByPk(id, {
-        attributes: ['id_client', 'name', 'phone'],
+        attributes: ['idClient', 'name', 'phone'],
         include: {
           model: Payment,
           attributes: ['amount', 'createdAt'],
 
           include: {
             model: PaymentMethod,
-            attributes: ['method_name'],
+            attributes: ['methodName'],
             through: { attributes: [] }
           }
 
@@ -30,9 +30,9 @@ export const getClient = async (id) => {
   }
 }
 
-export const createClient = async (name, phone) => {
+export const createClient = async (name, phone, id) => {
   try {
-    const newClient = await Client.create({ name, phone })
+    const newClient = await Client.create({ name, phone, id })
     return newClient
   } catch (error) {
     return error.message
@@ -50,7 +50,7 @@ export const updateClient = async (id, name, phone) => {
 
   const [affectedRows] = await Client.update(updateData, {
     where: {
-      id_client: id
+      idClient: id
     }
   })
 
@@ -70,7 +70,7 @@ export const deleteClient = async (id) => {
   }
   await Client.destroy({
     where: {
-      id_client: id
+      idClient: id
     }
 
   })

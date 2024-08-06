@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize'
 export default (sequelize) => {
   sequelize.define('ProvidedService',
     {
-      id_provided: {
+      idProvided: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true

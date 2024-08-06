@@ -10,9 +10,9 @@ export const getPaymentMethodsHanddler = async (req, res) => {
 
 export const postPaymentMethodHandler = async (req, res) => {
   try {
-    const { method_name } = req.body
+    const { methodName } = req.body
 
-    const newMethod = await postPaymentMethod({ method_name })
+    const newMethod = await postPaymentMethod({ methodName })
     res.status(201).json({ error: false, data: newMethod })
   } catch (error) {
     res.status(400).json({ error: true, message: error.message })
@@ -21,11 +21,11 @@ export const postPaymentMethodHandler = async (req, res) => {
 
 export const deletePaymentMethodHandler = async (req, res) => {
   try {
-    const { id_method } = req.body
-    if (!id_method) {
+    const { idMethod } = req.body
+    if (!idMethod) {
       throw Error('Se necesita el id del metodo para Eliminarlo')
     }
-    const methodDeleted = await deletePaymentMethod(id_method)
+    const methodDeleted = await deletePaymentMethod(idMethod)
     res.status(201).json({ error: false, data: methodDeleted })
   } catch (error) {
     res.status(400).json({ error: true, message: error.message })
@@ -34,11 +34,11 @@ export const deletePaymentMethodHandler = async (req, res) => {
 
 export const updatePaymentMethodHandler = async (req, res) => {
   try {
-    const { id_method, newMethodName } = req.body
-    if (!id_method) {
+    const { idMethod, newMethodName } = req.body
+    if (!idMethod) {
       throw Error('Se necesita el id del metodo para Actualizarlo')
     }
-    const updatedMethod = await updatePaymentMethod(id_method, newMethodName)
+    const updatedMethod = await updatePaymentMethod(idMethod, newMethodName)
     res.status(201).json({ error: false, data: updatedMethod })
   } catch (error) {
     res.status(400).json({ error: true, message: error.message })

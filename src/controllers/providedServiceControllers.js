@@ -2,12 +2,12 @@ import sequelize from '../database/db.js'
 
 const { ProvidedService, Barber, Client, Payment, PaymentMethod, Service } = sequelize.models
 
-export const postProvided = async (total, id_barber, id_client, id_service) => {
+export const postProvided = async (total, idBarber, idClient, idService) => {
   const date = new Date()
   const newService = await ProvidedService.create({ total, date })
-  await newService.setBarber(id_barber)
-  await newService.setClient(id_client)
-  await newService.addService(id_service)
+  await newService.setBarber(idBarber)
+  await newService.setClient(idClient)
+  await newService.addService(idService)
   console.log(newService)
 
   return newService
@@ -15,22 +15,22 @@ export const postProvided = async (total, id_barber, id_client, id_service) => {
 
 export const getProvidedServices = async () => {
   const services = await ProvidedService.findAll({
-    attributes: ['id_provided', 'date', 'total'],
+    attributes: ['idProvided', 'date', 'total'],
     include: [{
       model: Barber,
-      attributes: ['id_barber', 'name']
+      attributes: ['idBarber', 'name']
 
     },
     {
       model: Client,
-      attributes: ['id_client', 'name', 'phone']
+      attributes: ['idClient', 'name', 'phone']
 
     }, {
       model: Payment,
-      attributes: ['id_payment', 'amount'],
+      attributes: ['idPayment', 'amount'],
       include: {
         model: PaymentMethod,
-        attributes: ['id_method', 'method_name'],
+        attributes: ['idMethod', 'methodName'],
 
         through: { attributes: [] }
 
@@ -39,7 +39,7 @@ export const getProvidedServices = async () => {
     },
     {
       model: Service,
-      attributes: ['service_name'],
+      attributes: ['serviceName'],
       through: {
         attributes: []
       }
@@ -49,6 +49,6 @@ export const getProvidedServices = async () => {
 
   return services.map(service => ({
     ...service.toJSON(),
-    Services: service.Services.map(service => service.service_name)
+    Services: service.Services.map(service => service.serviceName)
   }))
 }
