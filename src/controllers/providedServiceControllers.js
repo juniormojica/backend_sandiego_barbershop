@@ -1,5 +1,4 @@
-
-import sequelize from "../database/db.js";
+import sequelize from '../database/db.js'
 
 const { ProvidedService, Barber, Client, Payment, PaymentMethod, Service } = sequelize.models
 
@@ -9,7 +8,7 @@ export const postProvided = async (total, id_barber, id_client, id_service) => {
   await newService.setBarber(id_barber)
   await newService.setClient(id_client)
   await newService.addService(id_service)
-  console.log(newService);
+  console.log(newService)
 
   return newService
 }
@@ -19,12 +18,12 @@ export const getProvidedServices = async () => {
     attributes: ['id_provided', 'date', 'total'],
     include: [{
       model: Barber,
-      attributes: ['id_barber', 'name'],
+      attributes: ['id_barber', 'name']
 
     },
     {
       model: Client,
-      attributes: ['id_client', 'name', 'phone'],
+      attributes: ['id_client', 'name', 'phone']
 
     }, {
       model: Payment,
@@ -48,11 +47,8 @@ export const getProvidedServices = async () => {
     ]
   })
 
-
   return services.map(service => ({
     ...service.toJSON(),
     Services: service.Services.map(service => service.service_name)
-  }));
+  }))
 }
-
-

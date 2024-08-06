@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize"
+import { DataTypes } from 'sequelize'
 export default (sequelize) => {
   sequelize.define('Barber',
     {
@@ -20,7 +20,6 @@ export default (sequelize) => {
         type: DataTypes.STRING,
         defaultValue: 'active'
       }
-
 
     }
   )

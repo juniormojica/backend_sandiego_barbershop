@@ -1,26 +1,26 @@
-import { DataTypes } from "sequelize";
+import { DataTypes } from 'sequelize'
 
 export default (sequelize) => {
   sequelize.define('User', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: true,
+      primaryKey: true
     },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
-        notEmpty: true,
-      },
+        notEmpty: true
+      }
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true,
-      },
+        notEmpty: true
+      }
     },
     email: {
       type: DataTypes.STRING,
@@ -28,13 +28,13 @@ export default (sequelize) => {
       unique: true,
       validate: {
         isEmail: true,
-        notEmpty: true,
-      },
+        notEmpty: true
+      }
     },
     roles: {
       type: DataTypes.ARRAY(DataTypes.STRING), // Usa ARRAY para almacenar múltiples roles
       allowNull: false,
-      defaultValue: ['user'], // Valor por defecto (puedes cambiarlo según tus necesidades)
+      defaultValue: ['user'] // Valor por defecto (puedes cambiarlo según tus necesidades)
     },
     isActive: {
       type: DataTypes.BOOLEAN,

@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize"
+import { DataTypes } from 'sequelize'
 export default (sequelize) => {
   sequelize.define('ProvidedService',
     {
@@ -15,7 +15,7 @@ export default (sequelize) => {
       total: {
         type: DataTypes.INTEGER,
         allowNull: false
-      },
+      }
 
     }, {
     timestamps: false

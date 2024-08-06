@@ -1,8 +1,8 @@
-import bcrypt from "bcrypt";
+import bcrypt from 'bcrypt'
 export const encriptPassWord = async (password) => {
   const salt = await bcrypt.genSalt(10)
   const passwordHashed = await bcrypt.hash(password, salt)
-  console.log('user Password' + passwordHashed);
+  console.log('user Password' + passwordHashed)
 
   return passwordHashed
 }

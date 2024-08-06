@@ -1,5 +1,5 @@
-import sequelize from "../database/db.js"
-import { Op } from "sequelize"
+import sequelize from '../database/db.js'
+import { Op } from 'sequelize'
 const { User } = sequelize.models
 export const getAllUsers = async () => {
   const users = await User.findAll({ attributes: { exclude: ['password'] } })
@@ -13,19 +13,14 @@ export const getUserById = async (id) => {
   try {
     const user = await User.findByPk(id, { attributes: { exclude: ['password'] } })
     if (!user) {
-      throw new Error("No se enconstro el usuario que consultas");
-
+      throw new Error('No se enconstro el usuario que consultas')
     }
 
     return user
-
-  }
-  catch (error) {
+  } catch (error) {
     throw Error(error.message)
   }
-
 }
-
 
 export const createUserController = async (user) => {
   try {
@@ -39,17 +34,16 @@ export const createUserController = async (user) => {
           { username }
         ]
       }
-    });
+    })
 
     if (existingUser) {
       if (existingUser.email === email) {
-        throw new Error('El correo electrónico ya está registrado.');
+        throw new Error('El correo electrónico ya está registrado.')
       }
       if (existingUser.username === username) {
-        throw new Error('El nombre de usuario ya está registrado.');
+        throw new Error('El nombre de usuario ya está registrado.')
       }
     }
-
 
     // Si no existen registros con el correo electrónico o el nombre de usuario, crear uno nuevo
     const newUser = await User.create({
@@ -58,12 +52,9 @@ export const createUserController = async (user) => {
       email,
       roles,
       isActive
-    });
-    return newUser;
-
+    })
+    return newUser
   } catch (error) {
-    throw new Error(error.message);
-
+    throw new Error(error.message)
   }
-
 }

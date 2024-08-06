@@ -1,6 +1,4 @@
-import sequelize from "../database/db.js";
-
-import { DataTypes } from "sequelize";
+import { DataTypes } from 'sequelize'
 
 export default function (sequelize) {
   sequelize.define(
@@ -13,10 +11,8 @@ export default function (sequelize) {
     amount: {
       type: DataTypes.INTEGER,
       allowNull: false
-    },
+    }
 
   }
   )
 }
-
-

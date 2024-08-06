@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize"
+import { DataTypes } from 'sequelize'
 export default (sequelize) => {
   sequelize.define('Service',
     {
@@ -19,9 +19,7 @@ export default (sequelize) => {
       category: {
         type: DataTypes.STRING,
         allowNull: false
-      },
-
-
+      }
 
     }, {
     timestamps: false

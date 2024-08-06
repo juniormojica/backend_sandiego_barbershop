@@ -1,15 +1,11 @@
-import { postPaymentMethod, getPaymentMethods, deletePaymentMethod, updatePaymentMethod } from "../controllers/paymentMethodsController.js"
+import { postPaymentMethod, getPaymentMethods, deletePaymentMethod, updatePaymentMethod } from '../controllers/paymentMethodsController.js'
 export const getPaymentMethodsHanddler = async (req, res) => {
   try {
-
-
     const newMethod = await getPaymentMethods()
     res.status(201).json({ error: false, data: newMethod })
-
   } catch (error) {
     res.status(400).json({ error: true, message: error.message })
   }
-
 }
 
 export const postPaymentMethodHandler = async (req, res) => {
@@ -18,13 +14,9 @@ export const postPaymentMethodHandler = async (req, res) => {
 
     const newMethod = await postPaymentMethod({ method_name })
     res.status(201).json({ error: false, data: newMethod })
-
   } catch (error) {
     res.status(400).json({ error: true, message: error.message })
   }
-
-
-
 }
 
 export const deletePaymentMethodHandler = async (req, res) => {
@@ -35,15 +27,10 @@ export const deletePaymentMethodHandler = async (req, res) => {
     }
     const methodDeleted = await deletePaymentMethod(id_method)
     res.status(201).json({ error: false, data: methodDeleted })
-
   } catch (error) {
     res.status(400).json({ error: true, message: error.message })
   }
-
-
-
 }
-
 
 export const updatePaymentMethodHandler = async (req, res) => {
   try {
@@ -53,11 +40,7 @@ export const updatePaymentMethodHandler = async (req, res) => {
     }
     const updatedMethod = await updatePaymentMethod(id_method, newMethodName)
     res.status(201).json({ error: false, data: updatedMethod })
-
   } catch (error) {
     res.status(400).json({ error: true, message: error.message })
   }
-
-
-
 }

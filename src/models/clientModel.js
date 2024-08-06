@@ -1,4 +1,4 @@
-import { DataTypes, } from "sequelize";
+import { DataTypes } from 'sequelize'
 
 export default (sequelize) => {
   sequelize.define('Client', {
@@ -17,4 +17,4 @@ export default (sequelize) => {
       autoIncrement: true
     }
   })
-} 
+}

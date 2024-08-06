@@ -1,4 +1,4 @@
-import sequelize from "../database/db.js";
+import sequelize from '../database/db.js'
 
 const { Barber, Client, PaymentMethod, Service } = sequelize.models
 
@@ -6,18 +6,18 @@ const barbersData = [
   {
     name: 'Santiago',
     phone: '162165162',
-    state: 'active',
+    state: 'active'
   },
   {
     name: 'junior',
     phone: '323232',
-    state: 'active',
+    state: 'active'
   },
   {
     name: 'miguel',
     phone: '43434',
-    state: 'active',
-  },
+    state: 'active'
+  }
 ]
 const clientsData = [{ name: 'Juan Pérez', phone: '555-1234' },
 { name: 'María Gómez', phone: '555-5678' },
@@ -29,7 +29,7 @@ const paymentMethods = [
   { method_name: 'nequi' },
   { method_name: 'bancolombia' },
   { method_name: 'efectivo' },
-  { method_name: 'daviPlata' },
+  { method_name: 'daviPlata' }
 ]
 
 const services = [
@@ -68,13 +68,12 @@ const services = [
     duration: 20, // duración en minutos
     category: 'Tratamiento'
   }
-];
+]
 export const injectSeeds = async () => {
   await Barber.bulkCreate(barbersData)
-  await Client.bulkCreate(clientsData);
-  await PaymentMethod.bulkCreate(paymentMethods);
+  await Client.bulkCreate(clientsData)
+  await PaymentMethod.bulkCreate(paymentMethods)
   await Service.bulkCreate(services)
 
-  console.log('seeds injected!');
+  console.log('seeds injected!')
 }
-

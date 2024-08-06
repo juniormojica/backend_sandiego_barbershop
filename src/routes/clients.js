@@ -1,7 +1,7 @@
 // routes/clientes.js
-import express from 'express';
-import { getClientsHandler, postClientHandler, patchClientHandler, deleteClientHandler } from '../handlers/clientsHandlers.js';
-const clientRouter = express.Router();
+import express from 'express'
+import { getClientsHandler, postClientHandler, patchClientHandler, deleteClientHandler } from '../handlers/clientsHandlers.js'
+const clientRouter = express.Router()
 
 clientRouter
   .get('/', getClientsHandler)
@@ -10,4 +10,4 @@ clientRouter
   .patch('/:id', patchClientHandler)
   .delete('/:id', deleteClientHandler)
 
-export default clientRouter;
+export default clientRouter

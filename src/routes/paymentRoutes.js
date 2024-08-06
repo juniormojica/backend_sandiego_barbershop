@@ -1,6 +1,6 @@
-import { Router } from "express";
-import { postPaymentHandler, getPaymentsHandler } from "../handlers/paymentHandler.js";
-const paymentRouter = Router();
+import { Router } from 'express'
+import { postPaymentHandler, getPaymentsHandler } from '../handlers/paymentHandler.js'
+const paymentRouter = Router()
 
 paymentRouter
   .get('/', getPaymentsHandler)

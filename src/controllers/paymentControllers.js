@@ -1,9 +1,7 @@
-
-import sequelize from "../database/db.js"
+import sequelize from '../database/db.js'
 const { Payment, Client } = sequelize.models
 export const createPayment = async (payment) => {
   const { id_client, id_method, amount, id_provided } = payment
-
 
   const newPayment = await Payment.create({ amount })
 

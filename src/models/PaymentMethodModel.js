@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize";
+import { DataTypes } from 'sequelize'
 
 export default (sequelize) => {
   sequelize.define('PaymentMethod', {
@@ -11,7 +11,7 @@ export default (sequelize) => {
     method_name: {
       type: DataTypes.STRING,
       allowNull: false
-    },
+    }
 
   }, {
     timestamps: false
