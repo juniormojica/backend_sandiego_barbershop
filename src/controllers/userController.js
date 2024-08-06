@@ -1,6 +1,6 @@
 import sequelize from '../database/db.js'
 import { Op } from 'sequelize'
-const { User } = sequelize.models
+const { User, Client } = sequelize.models
 export const getAllUsers = async () => {
   const users = await User.findAll({ attributes: { exclude: ['password'] } })
   if (users.length === 0) {
@@ -11,7 +11,15 @@ export const getAllUsers = async () => {
 
 export const getUserById = async (id) => {
   try {
-    const user = await User.findByPk(id, { attributes: { exclude: ['password'] } })
+    const user = await User.findByPk(id, {
+      attributes: {
+        exclude: ['password'] // Excluye la contraseña del usuario
+      },
+      include: [{
+        model: Client, // Incluye el modelo Client relacionado
+        attributes: ['name', 'phone'] // Selecciona los atributos específicos del modelo Client
+      }]
+    })
     if (!user) {
       throw new Error('No se enconstro el usuario que consultas')
     }
