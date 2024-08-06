@@ -6,5 +6,5 @@ export const userRouter = Router()
 
 userRouter
   .get('/', getUsersHandler)
-  .get('/:id', verifyToken, getUserByIdHandler)
+  .get('/:id', getUserByIdHandler)
   .post('/', createUserHandler)
