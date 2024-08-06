@@ -18,7 +18,7 @@ export const signInHandler = async (req, res) => {
       return res.status(404).json({ error: true, message: 'Invalid Password please try again' });
     }
 
-    const token = jwt.sign({ id: userNameFound.username }, SECRET, { expiresIn: 86400 })
+    const token = jwt.sign({ id: userNameFound.id }, SECRET, { expiresIn: 86400 })
     return res.status(200).json({ error: false, data: { token } });
 
   } catch (error) {
@@ -44,8 +44,6 @@ export const signUpHandler = async (req, res) => {
     const newUser = await signUpController(user)
 
     const token = jwt.sign({ id: newUser.id }, SECRET, { expiresIn: 86400 })
-    console.log('nuevo Usuario', newUser);
-
 
     res.status(201).json({ error: false, token })
 
