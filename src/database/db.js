@@ -1,11 +1,5 @@
 import { Sequelize } from 'sequelize'
-import definePaymentModel from '../models/PaymentModel.js'
-import defineClientModel from '../models/clientModel.js'
-import definePaymentMethodModel from '../models/PaymentMethodModel.js'
-import defineBarberModel from '../models/barberModel.js'
-import defineServiceModel from '../models/serviceModel.js'
-import defineProvidedServiceModel from '../models/ProvidedServiceModel.js'
-import defineUserModel from '../models/userModel.js'
+import { defineBarberModel, defineClientModel, definePaymentMethodModel, definePaymentModel, defineProvidedServiceModel, defineServiceModel, defineUserModel } from '../models/index.js'
 
 const { DB_HOST, DB_NAME, DB_PORT, DB_USER, DB_PASSWORD } = process.env
 
