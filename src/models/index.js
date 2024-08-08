@@ -5,7 +5,15 @@ import defineBarberModel from '../models/barberModel.js'
 import defineServiceModel from '../models/serviceModel.js'
 import defineProvidedServiceModel from '../models/ProvidedServiceModel.js'
 import defineUserModel from '../models/userModel.js'
+import defineRoleModel from '../models/roleModel.js'
 
 export {
-  defineBarberModel, defineClientModel, definePaymentMethodModel, definePaymentModel, defineProvidedServiceModel, defineServiceModel, defineUserModel
+  defineBarberModel,
+  defineClientModel,
+  definePaymentMethodModel,
+  definePaymentModel,
+  defineProvidedServiceModel,
+  defineServiceModel,
+  defineUserModel,
+  defineRoleModel
 }
