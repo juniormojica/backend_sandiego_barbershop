@@ -1,5 +1,9 @@
 import { Sequelize } from 'sequelize'
-import { defineBarberModel, defineClientModel, definePaymentMethodModel, definePaymentModel, defineProvidedServiceModel, defineServiceModel, defineUserModel } from '../models/index.js'
+import {
+  defineBarberModel, defineClientModel, definePaymentMethodModel,
+  definePaymentModel, defineProvidedServiceModel, defineServiceModel,
+  defineUserModel, defineRoleModel
+} from '../models/index.js'
 
 const { DB_HOST, DB_NAME, DB_PORT, DB_USER, DB_PASSWORD } = process.env
 
@@ -12,13 +16,12 @@ defineBarberModel(sequelize)
 defineServiceModel(sequelize)
 defineProvidedServiceModel(sequelize)
 defineUserModel(sequelize)
+defineRoleModel(sequelize)
 
-const { Client, Payment, PaymentMethod, Barber, Service, ProvidedService, User } = sequelize.models
+const { Client, Payment, PaymentMethod, Barber, Service, ProvidedService, User, Role } = sequelize.models
 
 // Relation beetween CLient and payment
-Client.hasMany(Payment, {
-  foreignKey: 'idClient'
-})
+Client.hasMany(Payment, { foreignKey: 'idClient' })
 Payment.belongsTo(Client, { foreignKey: 'idClient' })
 
 Barber.belongsTo(User, { foreignKey: 'idUser' })
@@ -43,5 +46,8 @@ ProvidedService.belongsTo(Client, { foreignKey: 'idClient' })
 
 ProvidedService.hasMany(Payment, { foreignKey: 'idProvided' })
 Payment.belongsTo(ProvidedService, { foreignKey: 'idProvided' })
+
+User.belongsToMany(Role, { through: 'UserRole', foreignKey: 'idUser', timestamps: false })
+Role.belongsToMany(User, { through: 'UserRole', foreignKey: 'idRole', timestamps: false })
 
 export default sequelize
