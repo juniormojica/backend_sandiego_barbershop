@@ -1,7 +1,7 @@
 // app.js
 import express from 'express'
 import morgan from 'morgan'
-import { autRouter, clientRouter, paymentMethodRouter, paymentRouter, providedServiceRouter, userRouter } from './routes/index.js'
+import { autRouter, clientRouter, paymentMethodRouter, paymentRouter, providedServiceRouter, userRouter, barberRouter } from './routes/index.js'
 
 const app = express()
 
@@ -14,5 +14,7 @@ app.use('/payments', paymentRouter)
 app.use('/providedservices', providedServiceRouter)
 app.use('/auth', autRouter)
 app.use('/user', userRouter)
+app.use('/barbers', barberRouter)
+app.use('/barber', barberRouter)
 
 export default app

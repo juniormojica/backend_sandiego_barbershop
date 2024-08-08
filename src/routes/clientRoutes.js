@@ -1,6 +1,6 @@
 // routes/clientes.js
 import express from 'express'
-import { getClientsHandler, postClientHandler, patchClientHandler, deleteClientHandler } from '../handlers/clientsHandlers.js'
+import { getClientsHandler, postClientHandler, patchClientHandler, deleteClientHandler } from '../handlers/clientHandlers.js'
 const clientRouter = express.Router()
 
 clientRouter
