@@ -31,11 +31,7 @@ export default (sequelize) => {
         notEmpty: true
       }
     },
-    roles: {
-      type: DataTypes.ARRAY(DataTypes.STRING), // Usa ARRAY para almacenar múltiples roles
-      allowNull: false,
-      defaultValue: ['user'] // Valor por defecto (puedes cambiarlo según tus necesidades)
-    },
+
     isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
