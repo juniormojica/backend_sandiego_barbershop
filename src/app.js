@@ -1,12 +1,8 @@
 // app.js
 import express from 'express'
 import morgan from 'morgan'
-import clientRouter from './routes/clients.js'
-import paymentMethodRouter from './routes/paymentMethodRoutes.js'
-import paymentRouter from './routes/paymentRoutes.js'
-import providedServiceRouter from './routes/providedServiceRoute.js'
-import autRouter from './routes/authRoutes.js'
-import { userRouter } from './routes/userRoute.js'
+import { autRouter, clientRouter, paymentMethodRouter, paymentRouter, providedServiceRouter, userRouter } from './routes/index.js'
+
 const app = express()
 
 // Usa el router de clientes para manejar las rutas que comienzan con /clientes
