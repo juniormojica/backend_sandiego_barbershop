@@ -1,4 +1,4 @@
-import { createBarber } from '../controllers/barberControllers.js'
+import { createBarber, getBarberByIdCtrl } from '../controllers/barberControllers.js'
 export const getAllBarbers = async (req, res) => {
   try {
     res.status(200).json({ error: false, data: 'All barbers' })
@@ -9,7 +9,11 @@ export const getAllBarbers = async (req, res) => {
 
 export const getBarberById = async (req, res) => {
   try {
-    res.status(200).json({ error: false, data: 'barber by id' })
+    const { id } = req.params
+    if (!id) throw new Error('No se envío el id del barbero a eliminar')
+    const barberFound = await getBarberByIdCtrl(id)
+    if (!barberFound) throw new Error(`No se encontró el barbero con el id ${id} `)
+    res.status(200).json({ error: false, data: barberFound })
   } catch (error) {
     res.status(400).json({ error: true, message: error.message })
   }
