@@ -14,7 +14,13 @@ export const getAllBarbersCtrl = async () => {
 }
 
 export const getBarberByIdCtrl = async (id) => {
-  const barber = Barber.findByPk(id)
+  const barber = Barber.findByPk(id, {
+    attributes: ['name', 'phone', 'state'],
+    include: {
+      model: User,
+      attributes: ['username']
+    }
+  })
   if (!barber) throw new Error(`No se encontro el barbero con id ${id} en la base de datos`)
   return barber
 }
