@@ -1,7 +1,10 @@
-import { createBarber, getBarberByIdCtrl } from '../controllers/barberControllers.js'
+import { createBarber, getBarberByIdCtrl, getAllBarbersCtrl } from '../controllers/barberControllers.js'
 export const getAllBarbers = async (req, res) => {
   try {
-    res.status(200).json({ error: false, data: 'All barbers' })
+    const barbers = await getAllBarbersCtrl()
+    if (!barbers) throw new Error('No Existen barberos en la db')
+
+    res.status(200).json({ error: false, data: barbers })
   } catch (error) {
     res.status(400).json({ error: true, message: error.message })
   }

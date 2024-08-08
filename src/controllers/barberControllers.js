@@ -1,6 +1,17 @@
 import sequelize from '../database/db.js'
-const { Barber } = sequelize.models
-export const getAllBarbers = async () => { }
+const { Barber, User } = sequelize.models
+export const getAllBarbersCtrl = async () => {
+  const barbers = await Barber.findAll({
+    attributes: ['name', 'phone', 'state'],
+    include: {
+      model: User,
+      attributes: ['username']
+    }
+  })
+  if (!barbers) throw new Error('No se encontraron los barberos')
+
+  return barbers
+}
 
 export const getBarberByIdCtrl = async (id) => {
   const barber = Barber.findByPk(id)
