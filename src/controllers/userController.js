@@ -1,6 +1,6 @@
 import sequelize from '../database/db.js'
 import { Op } from 'sequelize'
-const { User, Client } = sequelize.models
+const { User, Client, Role } = sequelize.models
 export const getAllUsers = async () => {
   const users = await User.findAll({ attributes: { exclude: ['password'] } })
   if (users.length === 0) {
@@ -18,6 +18,14 @@ export const getUserById = async (id) => {
       include: [{
         model: Client, // Incluye el modelo Client relacionado
         attributes: ['name', 'phone'] // Selecciona los atributos específicos del modelo Client
+      }, {
+        model: Role,
+        attributes: ['roleName'],
+        through: {
+          attributes: []
+
+        }
+
       }]
     })
     if (!user) {
@@ -32,7 +40,7 @@ export const getUserById = async (id) => {
 
 export const createUserController = async (user) => {
   try {
-    const { username, email, password, roles, isActive } = user
+    const { username, email, password, idRole, isActive } = user
 
     // Verificar si el correo electrónico ya existe
     const existingUser = await User.findOne({
@@ -58,9 +66,9 @@ export const createUserController = async (user) => {
       username,
       password,
       email,
-      roles,
       isActive
     })
+    await newUser.addRoles(idRole)
     return newUser
   } catch (error) {
     throw new Error(error.message)
