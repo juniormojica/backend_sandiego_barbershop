@@ -27,7 +27,7 @@ export const getUserByIdHandler = async (req, res) => {
 
 export const createUserHandler = async (req, res) => {
   try {
-    const { username, password, email, roles, isActive } = req.body
+    const { username, password, email, isActive, idRole } = req.body
     if (!username || !password || !email) {
       return res.status(400).json({ error: true, message: 'Faltan datos para crear el usuario: Username, Password, o Email' })
     }
@@ -35,7 +35,7 @@ export const createUserHandler = async (req, res) => {
       username,
       email,
       password: await encriptPassWord(password),
-      roles,
+      idRole,
       isActive
     }
     const newUser = await createUserController(user)
