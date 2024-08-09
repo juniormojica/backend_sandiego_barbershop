@@ -1,4 +1,4 @@
-import { createBarber, getBarberByIdCtrl, getAllBarbersCtrl } from '../controllers/barberControllers.js'
+import { createBarber, getBarberByIdCtrl, getAllBarbersCtrl, deleteBarberCtrl } from '../controllers/barberControllers.js'
 export const getAllBarbers = async (req, res) => {
   try {
     const barbers = await getAllBarbersCtrl()
@@ -28,7 +28,7 @@ export const postBarber = async (req, res) => {
       res.status(400).json({ error: true, message: 'Faltan datos para crear el usuario, necesitas name,phone,idUser' })
       return
     }
-    const newBarber = await createBarber({ name, phone, idUser })
+    const newBarber = await createBarberCtrl({ name, phone, idUser })
     if (newBarber) {
       res.status(200).json({ error: false, data: newBarber })
     } else {
@@ -40,8 +40,23 @@ export const postBarber = async (req, res) => {
 }
 export const deleteBarber = async (req, res) => {
   try {
-    res.status(200).json({ error: false, data: 'deleted barber' })
+    const { id } = req.params
+
+    console.log(id)
+
+    if (!id) {
+      return res.status(400).json({ error: true, message: 'ID del barbero es requerido' })
+    }
+
+    const barber = await deleteBarberCtrl(id)
+
+    if (!barber) {
+      return res.status(404).json({ error: true, message: 'Barbero no encontrado' })
+    }
+
+    res.status(200).json({ error: false, message: barber })
   } catch (error) {
-    res.status(400).json({ error: true, message: error.message })
+    // Enviar respuesta de error
+    res.status(500).json({ error: true, message: error.message })
   }
 }
