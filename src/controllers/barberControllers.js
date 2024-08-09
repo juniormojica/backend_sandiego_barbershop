@@ -24,7 +24,7 @@ export const getBarberByIdCtrl = async (id) => {
   if (!barber) throw new Error(`No se encontro el barbero con id ${id} en la base de datos`)
   return barber
 }
-export const createBarber = async (barberInfo) => {
+export const createBarberCtrl = async (barberInfo) => {
   const [barber] = await Barber.findOrCreate({
     where: { phone: barberInfo.phone },
     defaults: barberInfo
@@ -36,7 +36,7 @@ export const createBarber = async (barberInfo) => {
     throw new Error('Error al crear o encontrar el barbero')
   }
 }
-export const deleteBarberCtr = async (id) => {
+export const deleteBarberCtrl = async (id) => {
   const barber = await Barber.findByPk(id)
   if (barber) {
     await barber.destroy()
