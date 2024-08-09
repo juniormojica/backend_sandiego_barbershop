@@ -36,4 +36,11 @@ export const createBarber = async (barberInfo) => {
     throw new Error('Error al crear o encontrar el barbero')
   }
 }
-export const deleteBarber = async () => { }
+export const deleteBarberCtr = async (id) => {
+  const barber = await Barber.findByPk(id)
+  if (barber) {
+    await barber.destroy()
+    return `Barbero con el id ${id} eliminado correctamente`
+  }
+  throw new Error(`No se encotro el barbero con la id ${id},no se eliminó`)
+}
