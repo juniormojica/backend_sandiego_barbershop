@@ -19,12 +19,6 @@ const barbersData = [
     state: 'active'
   }
 ]
-const clientsData = [
-  { name: 'Juan Pérez', phone: '555-1234' },
-  { name: 'Mario Gómez', phone: '555-5678' },
-  { name: 'Carlos López', phone: '555-8765' },
-  { name: 'Ana Martínez', phone: '555-4321' },
-  { name: 'Luis Fernández', phone: '555-6789' }]
 
 const paymentMethods = [
   { methodName: 'nequi' },

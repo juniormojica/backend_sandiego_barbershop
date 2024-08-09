@@ -8,5 +8,6 @@ barberRouter.get('/:id', getBarberById)
 
 barberRouter.post('/', postBarber)
 
-barberRouter.delete('/', deleteBarber)
+barberRouter.delete('/:id', deleteBarber)
+
 export default barberRouter
