@@ -1,15 +1,18 @@
 import sequelize from '../database/db.js'
 import { Op } from 'sequelize'
 const { User, Client, Role } = sequelize.models
-export const getAllUsers = async () => {
-  const users = await User.findAll({ attributes: { exclude: ['password'] } })
+export const getAllUsersCtrl = async () => {
+  const users = await User.findAll({
+    attributes:
+      { exclude: ['password'] }
+  })
   if (users.length === 0) {
     throw Error('No existen usuarios creados,Verificar base de datos ')
   }
   return users
 }
 
-export const getUserById = async (id) => {
+export const getUserByIdCtrl = async (id) => {
   try {
     const user = await User.findByPk(id, {
       attributes: {
@@ -38,7 +41,7 @@ export const getUserById = async (id) => {
   }
 }
 
-export const createUserController = async (user) => {
+export const createUserCtrl = async (user) => {
   try {
     const { username, email, password, idRole, isActive } = user
 
@@ -68,9 +71,24 @@ export const createUserController = async (user) => {
       email,
       isActive
     })
-    await newUser.addRoles(idRole)
+    if (Array.isArray(idRole)) {
+      await newUser.addRoles(idRole)
+    } else {
+      await newUser.addRole(idRole)
+    }
+
     return newUser
   } catch (error) {
     throw new Error(error.message)
   }
+}
+
+export const deleteUserCtrl = async (id) => {
+  const user = await User.findByPk(id)
+
+  if (user) {
+    await user.destroy()
+    return `Usuario con el id ${id} y usuario ${user.username} eliminado correctamente`
+  }
+  throw new Error(`No se encotro el Usuario con la id ${id},no se eliminó`)
 }
