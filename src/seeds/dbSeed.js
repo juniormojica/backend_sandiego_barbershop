@@ -1,6 +1,6 @@
 import sequelize from '../database/db.js'
 
-const { Barber, Client, PaymentMethod, Service, User } = sequelize.models
+const { Barber, PaymentMethod, Service } = sequelize.models
 
 const barbersData = [
   {
@@ -67,7 +67,7 @@ const services = [
 
 export const injectSeeds = async () => {
   await Barber.bulkCreate(barbersData)
-  await Client.bulkCreate(clientsData)
+
   await PaymentMethod.bulkCreate(paymentMethods)
   await Service.bulkCreate(services)
 
