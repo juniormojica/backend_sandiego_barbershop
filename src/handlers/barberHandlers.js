@@ -1,4 +1,4 @@
-import { createBarber, getBarberByIdCtrl, getAllBarbersCtrl, deleteBarberCtrl } from '../controllers/barberControllers.js'
+import { createBarberCtrl, getBarberByIdCtrl, getAllBarbersCtrl, deleteBarberCtrl } from '../controllers/barberControllers.js'
 export const getAllBarbers = async (req, res) => {
   try {
     const barbers = await getAllBarbersCtrl()
