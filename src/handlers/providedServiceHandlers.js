@@ -1,4 +1,4 @@
-import { postProvided, getProvidedServices } from '../controllers/providedServiceControllers.js'
+import { postProvided, getProvidedServices, getProvidedServiceById } from '../controllers/providedServiceControllers.js'
 export const getProvidedHandler = async (req, res) => {
   try {
     const providedServices = await getProvidedServices()
@@ -21,6 +21,17 @@ export const postProvidedHandler = async (req, res) => {
 
     const service = await postProvided(total, idBarber, idClient, idService)
     res.status(201).json({ error: false, data: service })
+  } catch (error) {
+    res.status(400).json({ error: true, message: error.message })
+  }
+}
+
+export const getProvidedByIdHandler = async (req, res) => {
+  try {
+    const { id } = req.params
+    const providedServices = await getProvidedServiceById(id)
+
+    res.status(201).json({ error: false, data: providedServices })
   } catch (error) {
     res.status(400).json({ error: true, message: error.message })
   }
