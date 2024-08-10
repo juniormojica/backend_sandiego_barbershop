@@ -1,10 +1,25 @@
 import sequelize from '../database/db.js'
 import { Op } from 'sequelize'
-const { User, Client, Role } = sequelize.models
+const { User, Client, Role, Barber } = sequelize.models
 export const getAllUsersCtrl = async () => {
   const users = await User.findAll({
     attributes:
-      { exclude: ['password'] }
+      { exclude: ['password'] },
+    include: [{
+      model: Client, // Incluye el modelo Client relacionado
+      attributes: ['name', 'phone'] // Selecciona los atributos específicos del modelo Client
+    }, {
+      model: Role,
+      attributes: ['roleName'],
+      through: {
+        attributes: []
+
+      }
+
+    }, {
+      model: Barber, // Incluye el modelo Client relacionado
+      attributes: ['name', 'phone', 'state'] // Selecciona los atributos específicos del modelo Client
+    }]
   })
   if (users.length === 0) {
     throw Error('No existen usuarios creados,Verificar base de datos ')
