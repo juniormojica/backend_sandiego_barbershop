@@ -8,7 +8,7 @@ const SERVER_PORT = process.env.SERVER_PORT || 3000
 
 try {
   await sequelize.sync({ logging: false, alter: true })
-  // await injectSeeds()
+  /* await injectSeeds() */
   app.listen(SERVER_PORT, () => {
     console.log(`Running on port ${SERVER_PORT}`)
   })

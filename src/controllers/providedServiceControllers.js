@@ -56,17 +56,17 @@ export const getProvidedServices = async () => {
       ...rest,
       client: client
         ? {
-          id: client.idClient,
-          name: client.name,
-          phone: client.phone
-        }
+            id: client.idClient,
+            name: client.name,
+            phone: client.phone
+          }
         : null,
 
       barber: barber
         ? {
-          id: barber.idBarber,
-          name: barber.name
-        }
+            id: barber.idBarber,
+            name: barber.name
+          }
         : null,
       payments: payments.map(payment => {
         return {

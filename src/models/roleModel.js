@@ -8,7 +8,7 @@ export default (sequelize) => {
       primaryKey: true
     },
     roleName: {
-      type: DataTypes.ENUM('admin', 'owner', 'user', 'superAdmin', 'barber')
+      type: DataTypes.ENUM('admin', 'user', 'superAdmin', 'barber')
     },
     isActive: {
       type: DataTypes.STRING,

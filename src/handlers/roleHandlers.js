@@ -2,6 +2,8 @@ import { createRolCtrl, getAllRolesCtrl, getRoleByIdCtrl } from '../controllers/
 export const postRole = async (req, res) => {
   try {
     const { roleName } = req.body
+    console.log(roleName)
+
     const newRole = await createRolCtrl({ roleName })
     if (!newRole) {
       throw new Error('No fue posible crear el rol')

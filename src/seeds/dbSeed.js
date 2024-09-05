@@ -66,10 +66,10 @@ const services = [
 ]
 
 export const injectSeeds = async () => {
-  await Barber.bulkCreate(barbersData)
+  await Barber.bulkCreate(barbersData, { logging: false })
 
-  await PaymentMethod.bulkCreate(paymentMethods)
-  await Service.bulkCreate(services)
+  await PaymentMethod.bulkCreate(paymentMethods, { logging: false })
+  await Service.bulkCreate(services, { logging: false })
 
   console.log('seeds injected!')
 }
