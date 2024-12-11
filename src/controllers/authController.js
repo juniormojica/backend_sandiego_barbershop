@@ -11,18 +11,8 @@ export const signUpController = async (user) => {
     throw new Error('El correo electrónico ya está registrado.')
   }
 
-  // Verificar si el nombre de usuario ya existe
-  const existingUsernameUser = await User.findOne({
-    where: { username: user.username }
-  })
-
-  if (existingUsernameUser) {
-    throw new Error('El nombre de usuario ya está registrado.')
-  }
-
   // Si no existen registros con el correo electrónico o el nombre de usuario, crear uno nuevo
   const newUser = await User.create({
-    username: user.username,
     password: user.password,
     email: user.email,
     roles: user.roles,

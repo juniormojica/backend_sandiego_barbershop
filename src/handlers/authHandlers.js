@@ -27,19 +27,20 @@ export const signInHandler = async (req, res) => {
 
 export const signUpHandler = async (req, res) => {
   try {
-    const { username, email, password, roles } = req.body
+    const { email, password, roles } = req.body
+    console.log(req.body)
 
     const user = {
-      username,
       email,
       password: await encriptPassWord(password),
       roles
     }
     const newUser = await signUpController(user)
+    console.log(newUser)
 
     const token = jwt.sign({ id: newUser.id }, SECRET, { expiresIn: 86400 })
 
-    res.status(201).json({ error: false, token })
+    res.status(201).json({ error: false, token, idUser: newUser.dataValues.idUser })
   } catch (error) {
     res.status(400).json({ error: true, message: error.message })
   }

@@ -27,12 +27,11 @@ export const getUserByIdHandler = async (req, res) => {
 
 export const createUserHandler = async (req, res) => {
   try {
-    const { username, password, email, isActive, idRole } = req.body
-    if (!username || !password || !email) {
+    const { password, email, isActive, idRole } = req.body
+    if (!password || !email) {
       return res.status(400).json({ error: true, message: 'Faltan datos para crear el usuario: Username, Password, o Email' })
     }
     const user = {
-      username,
       email,
       password: await encriptPassWord(password),
       idRole,
@@ -43,7 +42,6 @@ export const createUserHandler = async (req, res) => {
     const token = jwt.sign({ id: newUser.id }, SECRET, { expiresIn: 86400 })
     const responseUser = {
       id: newUser.id,
-      username: newUser.username,
       email: newUser.email,
       roles: newUser.roles,
       isActive: newUser.isActive

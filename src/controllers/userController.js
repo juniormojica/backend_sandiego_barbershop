@@ -58,14 +58,13 @@ export const getUserByIdCtrl = async (id) => {
 
 export const createUserCtrl = async (user) => {
   try {
-    const { username, email, password, idRole, isActive } = user
+    const { email, password, idRole, isActive } = user
 
     // Verificar si el correo electrónico ya existe
     const existingUser = await User.findOne({
       where: {
         [Op.or]: [
-          { email },
-          { username }
+          { email }
         ]
       }
     })
@@ -74,14 +73,10 @@ export const createUserCtrl = async (user) => {
       if (existingUser.email === email) {
         throw new Error('El correo electrónico ya está registrado.')
       }
-      if (existingUser.username === username) {
-        throw new Error('El nombre de usuario ya está registrado.')
-      }
     }
 
     // Si no existen registros con el correo electrónico o el nombre de usuario, crear uno nuevo
     const newUser = await User.create({
-      username,
       password,
       email,
       isActive
