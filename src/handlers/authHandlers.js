@@ -33,7 +33,8 @@ export const signUpHandler = async (req, res) => {
     const user = {
       email,
       password: await encriptPassWord(password),
-      roles
+      roles: roles || 'user',
+      isActive: true
     }
     const newUser = await signUpController(user)
     console.log(newUser)
