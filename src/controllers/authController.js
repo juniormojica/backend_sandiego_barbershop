@@ -1,6 +1,5 @@
 import sequelize from '../database/db.js'
-
-const { User } = sequelize.models
+const { User, Role } = sequelize.models
 export const signUpController = async (user) => {
   // Verificar si el correo electrónico ya existe
   const existingEmailUser = await User.findOne({
@@ -11,12 +10,43 @@ export const signUpController = async (user) => {
     throw new Error('El correo electrónico ya está registrado.')
   }
 
-  // Si no existen registros con el correo electrónico o el nombre de usuario, crear uno nuevo
+  // Crear el nuevo usuario
   const newUser = await User.create({
-    password: user.password,
     email: user.email,
-    roles: user.roles,
+    password: user.password,
     isActive: user.isActive
   })
-  return newUser
+
+  // Manejar la asignación de roles
+  if (user.roles) {
+    // Si se proporciona un string, convertirlo a array
+    const roleNames = Array.isArray(user.roles) ? user.roles : [user.roles]
+
+    // Buscar los roles en la base de datos
+    const roles = await Role.findAll({
+      where: { roleName: roleNames }
+    })
+
+    // Si no se encuentra el rol, crear uno por defecto
+    if (roles.length === 0) {
+      const defaultRole = await Role.findOne({ where: { name: 'user' } })
+      if (defaultRole) {
+        await newUser.addRole(defaultRole)
+      }
+    } else {
+      // Asociar los roles encontrados al usuario
+      await newUser.addRoles(roles)
+    }
+  } else {
+    // Si no se proporcionan roles, buscar y asignar el rol por defecto
+    const defaultRole = await Role.findOne({ where: { name: 'user' } })
+    if (defaultRole) {
+      await newUser.addRole(defaultRole)
+    }
+  }
+
+  // Devolver el usuario con sus roles
+  return await User.findByPk(newUser.idUser, {
+    include: [Role]
+  })
 }

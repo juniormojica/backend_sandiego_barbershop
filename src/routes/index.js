@@ -6,10 +6,11 @@ import providedServiceRouter from './providedServiceRoutes.js'
 import userRouter from './userRoutes.js'
 import barberRouter from './barberRoutes.js'
 import roleRouter from './roleRoutes.js'
+import serviceRouter from './serviceRoutes.js'
 
 // EXPORTS
 export {
   autRouter, clientRouter, paymentMethodRouter,
   paymentRouter, providedServiceRouter, userRouter,
-  barberRouter, roleRouter
+  barberRouter, roleRouter, serviceRouter
 }

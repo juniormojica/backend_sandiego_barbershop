@@ -10,7 +10,7 @@ import {
   providedServiceRouter,
   userRouter,
   barberRouter,
-  roleRouter
+  roleRouter, serviceRouter
 } from './routes/index.js'
 
 const app = express()
@@ -31,5 +31,5 @@ app.use('/barbers', barberRouter)
 app.use('/barber', barberRouter)
 app.use('/role', roleRouter)
 app.use('/roles', roleRouter)
-
+app.use('/services', serviceRouter)
 export default app
