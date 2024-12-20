@@ -2,10 +2,10 @@ import sequelize from '../database/db.js'
 const { Barber, User } = sequelize.models
 export const getAllBarbersCtrl = async () => {
   const barbers = await Barber.findAll({
-    attributes: ['name', 'phone', 'state'],
+    attributes: ['name', 'phone', 'state', 'idBarber'],
     include: {
       model: User,
-      attributes: ['username']
+      attributes: ['idUser', 'email']
     }
   })
   if (!barbers) throw new Error('No se encontraron los barberos')
@@ -18,7 +18,7 @@ export const getBarberByIdCtrl = async (id) => {
     attributes: ['name', 'phone', 'state'],
     include: {
       model: User,
-      attributes: ['username']
+      attributes: ['idUser', 'email']
     }
   })
   if (!barber) throw new Error(`No se encontro el barbero con id ${id} en la base de datos`)
@@ -39,8 +39,19 @@ export const createBarberCtrl = async (barberInfo) => {
 export const deleteBarberCtrl = async (id) => {
   const barber = await Barber.findByPk(id)
   if (barber) {
-    await barber.destroy()
-    return `Barbero con el id ${id} eliminado correctamente`
+    barber.state = 'inactive'
+    await barber.save()
+    return `Barbero con el id ${id} desactivado correctamente`
   }
-  throw new Error(`No se encotro el barbero con la id ${id},no se eliminó`)
+  throw new Error(`No se encontró el barbero con el id ${id}, no se desactivó`)
+}
+
+export const toggleBarberStateCtrl = async (id) => {
+  const barber = await Barber.findByPk(id)
+  if (barber) {
+    barber.state = barber.state === 'active' ? 'inactive' : 'active'
+    await barber.save()
+    return `Barbero con el id ${id} ahora está ${barber.state}`
+  }
+  throw new Error(`No se encontró el barbero con el id ${id}`)
 }
