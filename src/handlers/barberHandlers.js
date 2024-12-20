@@ -1,4 +1,4 @@
-import { createBarberCtrl, getBarberByIdCtrl, getAllBarbersCtrl, toggleBarberStateCtrl } from '../controllers/barberControllers.js'
+import { createBarberCtrl, getBarberByIdCtrl, getAllBarbersCtrl, toggleBarberStateCtrl, getBarberUserInfoCtrl } from '../controllers/barberControllers.js'
 export const getAllBarbers = async (req, res) => {
   try {
     const barbers = await getAllBarbersCtrl()
@@ -51,5 +51,21 @@ export const toggleBarberState = async (req, res) => {
     res.status(200).json({ error: false, message })
   } catch (error) {
     res.status(500).json({ error: true, message: error.message })
+  }
+}
+export const getBarberUserInfo = async (req, res) => {
+  try {
+    const { id } = req.params
+    const barberInfo = await getBarberUserInfoCtrl(id)
+
+    res.status(200).json({
+      status: 'success',
+      data: barberInfo
+    })
+  } catch (error) {
+    res.status(404).json({
+      status: 'error',
+      message: error.message
+    })
   }
 }

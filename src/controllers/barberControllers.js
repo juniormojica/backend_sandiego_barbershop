@@ -1,5 +1,5 @@
 import sequelize from '../database/db.js'
-const { Barber, User } = sequelize.models
+const { Barber, User, Role } = sequelize.models
 export const getAllBarbersCtrl = async () => {
   const barbers = await Barber.findAll({
     attributes: ['name', 'phone', 'state', 'idBarber'],
@@ -54,4 +54,28 @@ export const toggleBarberStateCtrl = async (id) => {
     return `Barbero con el id ${id} ahora está ${barber.state}`
   }
   throw new Error(`No se encontró el barbero con el id ${id}`)
+}
+export const getBarberUserInfoCtrl = async (id) => {
+  const barber = await Barber.findByPk(id, {
+    attributes: ['idBarber', 'name', 'phone', 'state'],
+    include: {
+      model: User,
+      attributes: ['idUser', 'email', 'isActive'],
+      include: {
+        model: Role,
+        attributes: ['name'],
+        through: { attributes: [] } // Esto excluye los atributos de la tabla intermedia
+      }
+    }
+  })
+
+  if (!barber) {
+    throw new Error(`No se encontró el barbero con id ${id}`)
+  }
+
+  if (!barber.User) {
+    throw new Error(`El barbero con id ${id} no tiene un usuario asociado`)
+  }
+
+  return barber
 }
